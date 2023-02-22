@@ -1,13 +1,4 @@
-.wrapper {
-    width: 400px;
-    margin: 0 auto;
-    padding: 30px;
-}
-
-.titlePhone {
-    padding: 30px 0;
-}
-
-.titleCont {
-    padding: 25px 0;
+.default {
+    font-size: 25px;
+    font-weight: bold;
 }

@@ -1,0 +1,29 @@
+.userMenu__wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.userMenu__text {
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+.userMenu__btn {
+    color: green;
+    background-color: lightgray;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s linear;
+    width: 90px;
+}
+
+.userMenu__btn:hover {
+    background-color: #238923;
+    color: lightgray;
+}
