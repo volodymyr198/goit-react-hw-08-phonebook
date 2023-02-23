@@ -1,75 +1,66 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-// www@mail.com
+import { userApi } from './userApi';
 
-// const axiosBaseQuery =
-//     ({ baseUrl } = { baseUrl: '' }) =>
-//     async ({ url, method, data, params }) => {
-//         try {
-//             const result = await axios({
-//                 url: baseUrl + url,
-//                 method,
-//                 data,
-//                 params,
-//             });
-//             return { data: result.data };
-//         } catch (axiosError) {
-//             let err = axiosError;
-//             return {
-//                 errror: {
-//                     status: err.response?.status,
-//                     data: err.response?.data || err.message,
-//                 },
-//             };
-//         }
-//     };
+const initialState = {
+    user: {
+        name: null,
+        email: null,
+    },
+    token: null,
+    isLoggedIn: false,
+};
 
-// export const authApi = createApi({
-//     reducerPath: 'authApi',
-//     baseQuery: axiosBaseQuery({
-//         baseUrl: 'https://connections-api.herokuapp.com',
-//     }),
-//     tagTypes: ['Auth'],
-//     endpoints: builder => ({
-//         register: builder.mutation({
-//             query: values => ({
-//                 url: `/users/signup`,
-//                 method: 'POST',
-//                 body: values,
-//             }),
-//             providesTags: ['Auth'],
-//         }),
-//     }),
-// });
-
-export const authApi = createApi({
-    reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'https://connections-api.herokuapp.com/users',
-        prepareHeaders: (headers, { getState }) => {
-            const token = getState().auth.token;
-            if (token) {
-                headers.set('authorization', `Bearer ${token}`);
-            }
-            return headers;
-        },
-    }),
-    tagTypes: ['Auth'],
-    endpoints: builder => ({
-        register: builder.mutation({
-            query: values => ({
-                url: `/signup`,
-                method: 'POST',
-                body: {
-                    name: values.name,
-                    email: values.email,
-                    password: values.password,
-                },
-            }),
-            invalidatesTags: ['Auth'],
-        }),
-    }),
+export const authSlice = createSlice({
+    name: 'auth',
+    initialState,
+    extraReducers: builder => {
+        builder
+            .addMatcher(
+                userApi.endpoints.login.matchFulfilled,
+                (state, { payload }) => {
+                    state.token = payload.token;
+                    state.isLoggedIn = true;
+                    state.user = payload.user;
+                }
+            )
+            .addMatcher(
+                userApi.endpoints.register.matchFulfilled,
+                (state, { payload }) => {
+                    state.token = payload.token;
+                    state.isLoggedIn = true;
+                    state.user = payload.user;
+                }
+            )
+            .addMatcher(userApi.endpoints.logOut.matchFulfilled, (state, _) => {
+                state.token = null;
+                state.isLoggedIn = false;
+                state.user = null;
+            })
+            .addMatcher(
+                userApi.endpoints.getCurrent.matchFulfilled,
+                (state, { payload }) => {
+                    state.user.name = payload.name;
+                    state.user.email = payload.email;
+                    state.isLoggedIn = true;
+                }
+            );
+    },
 });
 
-export const { useRegisterMutation } = authApi;
+const persistConfig = {
+    key: 'token',
+    storage,
+    whitelist: ['token'],
+};
+
+export const persistedReducer = persistReducer(
+    persistConfig,
+    authSlice.reducer
+);
+
+export const { setCredentials } = authSlice.actions;
+
+export default authSlice.reducer;

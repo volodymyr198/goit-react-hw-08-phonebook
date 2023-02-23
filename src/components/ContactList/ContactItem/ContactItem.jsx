@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { RotatingLines } from 'react-loader-spinner';
 import { useEffect } from 'react';
 
-import { useDeleteContactMutation } from 'redux/contact.slice';
+import { useDeleteContactMutation } from 'redux/contactsSlice';
 import css from './ContactItem.module.css';
 
 const ContactItem = ({ id, name, number }) => {

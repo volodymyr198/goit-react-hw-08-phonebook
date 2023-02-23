@@ -7,7 +7,7 @@ import { RotatingLines } from 'react-loader-spinner';
 import {
     useAddContactMutation,
     useFetchContactsQuery,
-} from 'redux/contact.slice';
+} from 'redux/contactsSlice';
 import { useEffect } from 'react';
 import css from './FormPhonebook.module.css';
 
@@ -33,11 +33,14 @@ const FormPhonebook = () => {
     }, [isError]);
 
     const handleSubmit = (values, { resetForm }) => {
+        const name = values.name;
+        const number = values.phone;
         contacts.find(
             contact => contact.name.toLowerCase() === values.name.toLowerCase()
         )
             ? alert(`${values.name} is already in contacts!`)
-            : addContact(values) && resetForm();
+            : addContact({ name, number }) && resetForm();
+        console.log(number);
     };
 
     const validationSchema = Yup.object().shape({

@@ -1,11 +1,9 @@
-import { useRegisterMutation } from 'redux/authSlice';
+import { useRegisterMutation } from 'redux/userApi';
 
 import css from './RegisterForm.module.css';
 
 const RegisterForm = () => {
-    const [regicter, data] = useRegisterMutation();
-    console.log('regicter', regicter);
-    console.log('data', data);
+    const [regicter] = useRegisterMutation();
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -13,7 +11,7 @@ const RegisterForm = () => {
         const name = form.elements.name.value;
         const email = form.elements.email.value;
         const password = form.elements.password.value;
-        regicter(name, email, password);
+        regicter({ name, email, password });
         console.log(name, email, password);
     };
 

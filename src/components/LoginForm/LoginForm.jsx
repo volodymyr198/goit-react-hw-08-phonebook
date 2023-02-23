@@ -1,8 +1,17 @@
+import { useLoginMutation } from 'redux/userApi';
+
 import css from './LoginForm.module.css';
 
 const LoginForm = () => {
+    const [login] = useLoginMutation();
+
     const handleSubmit = e => {
         e.preventDefault();
+        const form = e.currentTarget;
+        const email = form.elements.email.value;
+        const password = form.elements.password.value;
+        login({ email, password });
+        console.log(email, password);
     };
 
     return (

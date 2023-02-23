@@ -4,7 +4,7 @@ import css from './ContactList.module.css';
 import ContactItem from './ContactItem';
 import { getFilteredContacts } from 'redux/selectors';
 
-import { useFetchContactsQuery } from 'redux/contact.slice';
+import { useFetchContactsQuery } from 'redux/contactsSlice';
 import { getFilter } from 'redux/selectors';
 
 const ContactList = () => {
@@ -21,11 +21,11 @@ const ContactList = () => {
             <ul className={css.contactList}>
                 {contacts &&
                     getFilteredContacts(contacts, filter).map(
-                        ({ id, name, phone }) => (
+                        ({ id, name, number }) => (
                             <ContactItem
                                 key={id}
                                 name={name}
-                                number={phone}
+                                number={number}
                                 id={id}
                             />
                         )
