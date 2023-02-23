@@ -17,12 +17,12 @@ const Filter = () => {
     };
 
     return (
-        <label className={css.filterLabel}>
+        <label className={css.label}>
             Find contacts by name
             <DebounceInput
                 minLength={1}
                 debounceTimeout={300}
-                className={css.filterInput}
+                className={css.input}
                 type="text"
                 value={filter}
                 onChange={changeFilter}

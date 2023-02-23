@@ -1,9 +1,48 @@
 .form {
-    width: 320px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: blueviolet;
+    border-radius: 10px;
 }
 
 .label {
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.input {
+    padding: 10px;
+    margin-top: 16px;
+}
+
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    transition: all 0.3s ease 0s;
+    color: green;
+    box-shadow: rgb(18 92 55 / 75%) 0px 2px 8px,
+        rgb(255 255 255 / 35%) 0px 1px inset,
+        rgb(255 255 255 / 20%) 0px 10px inset,
+        rgb(255 255 255 / 25%) 0px 10px 20px inset,
+        rgb(18 92 55 / 75%) 0px -15px 30px inset;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: green;
+    color: lightgray;
+    box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+        10px 10px 15px rgba(70, 70, 70, 0.12),
+        inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+        inset 10px 10px 15px rgba(70, 70, 70, 0.12);
 }

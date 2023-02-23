@@ -67,11 +67,11 @@ const FormPhonebook = () => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                <Form className={css.formPhone}>
-                    <label className={css.formLabel}>
+                <Form className={css.form}>
+                    <label className={css.label}>
                         Name
                         <Field
-                            className={css.formInput}
+                            className={css.input}
                             type="text"
                             name="name"
                             placeholder="Name"
@@ -82,10 +82,10 @@ const FormPhonebook = () => {
                             component="div"
                         />
                     </label>
-                    <label className={css.formLabel}>
+                    <label className={css.label}>
                         Number
                         <Field
-                            className={css.formInput}
+                            className={css.input}
                             type="tel"
                             name="phone"
                             pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
@@ -99,7 +99,7 @@ const FormPhonebook = () => {
                         />
                     </label>
                     <button
-                        className={css.formBtn}
+                        className={css.btn}
                         disabled={isLoading}
                         type="submit"
                     >
