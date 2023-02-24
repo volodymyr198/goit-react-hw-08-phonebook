@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RotatingLines } from 'react-loader-spinner';
 import {
@@ -9,26 +9,24 @@ import {
     useFetchContactsQuery,
 } from 'redux/contactsSlice';
 import { useEffect } from 'react';
+
+import { notifyAddContact, serverError } from 'utils/notification';
 import css from './FormPhonebook.module.css';
 
 const FormPhonebook = () => {
-    const notifyAdd = () => toast.success('Contact added!');
-    const notifyError = () =>
-        toast.error('Sorry, something went wrong, please try again later!');
-
     const [addContact, { isLoading, isSuccess, isError }] =
         useAddContactMutation();
     const { data: contacts } = useFetchContactsQuery();
 
     useEffect(() => {
         if (isSuccess) {
-            notifyAdd();
+            notifyAddContact();
         }
     }, [isSuccess]);
 
     useEffect(() => {
         if (isError) {
-            notifyError();
+            serverError();
         }
     }, [isError]);
 
@@ -40,7 +38,6 @@ const FormPhonebook = () => {
         )
             ? alert(`${values.name} is already in contacts!`)
             : addContact({ name, number }) && resetForm();
-        console.log(number);
     };
 
     const validationSchema = Yup.object().shape({
@@ -106,7 +103,7 @@ const FormPhonebook = () => {
                         disabled={isLoading}
                         type="submit"
                     >
-                        {isLoading && <RotatingLines height="12" width="12" />}
+                        {isLoading && <RotatingLines height="20" width="20" />}
                         Add contact
                     </button>
                 </Form>

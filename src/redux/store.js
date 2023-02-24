@@ -13,7 +13,6 @@ import { filterSlice } from './filterSlice';
 import { userApi } from './userApi';
 import { contactApi } from './contactsSlice';
 import { persistedReducer } from './authSlice';
-// import { setupListeners } from '@reduxjs/toolkit/query';
 
 export const store = configureStore({
     reducer: {
@@ -41,5 +40,4 @@ export const store = configureStore({
     ],
 });
 
-// setupListeners(store.dispatch);
 export const persistor = persistStore(store);

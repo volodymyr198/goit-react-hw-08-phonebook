@@ -1,19 +1,19 @@
 import { PropTypes } from 'prop-types';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RotatingLines } from 'react-loader-spinner';
 import { useEffect } from 'react';
 
+import { notifyDeliteContact } from 'utils/notification';
 import { useDeleteContactMutation } from 'redux/contactsSlice';
 import css from './ContactItem.module.css';
 
 const ContactItem = ({ id, name, number }) => {
     const [deleteContact, { isLoading, isSuccess }] =
         useDeleteContactMutation();
-    const notify = () => toast.info('Contact deleted!');
+
     useEffect(() => {
         if (isSuccess) {
-            notify();
+            notifyDeliteContact();
         }
     }, [isSuccess]);
 
@@ -23,9 +23,9 @@ const ContactItem = ({ id, name, number }) => {
             <button
                 onClick={() => deleteContact(id)}
                 disabled={isLoading}
-                className={css.delBtn}
+                className={css.btn}
             >
-                {isLoading && <RotatingLines height="12" width="12" />}
+                {isLoading && <RotatingLines height="20" width="20" />}
                 Delete
             </button>
         </li>

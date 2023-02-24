@@ -13,9 +13,11 @@ const ContactList = () => {
     const { data: contacts, isLoading, error } = useFetchContactsQuery();
     return (
         <>
-            {isLoading && <p>...Loading</p>}
+            {isLoading && <p className={css.default}>...loading</p>}
             {error && (
-                <p>Sorry, something went wrong, please try again later!</p>
+                <p className={css.default}>
+                    Sorry, something went wrong, please try again later!
+                </p>
             )}
             {contacts && contacts.length === 0 && <p>There is no contact!</p>}
             <ul className={css.contactList}>

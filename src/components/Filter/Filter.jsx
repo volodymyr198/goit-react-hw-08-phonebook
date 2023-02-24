@@ -25,6 +25,7 @@ const Filter = () => {
                 className={css.input}
                 type="text"
                 value={filter}
+                placeholder="Search"
                 onChange={changeFilter}
             />
         </label>
