@@ -29,7 +29,6 @@ const RegisterForm = () => {
         const password = form.elements.password.value;
 
         regicter({ name, email, password });
-        form.reset();
     };
 
     return (

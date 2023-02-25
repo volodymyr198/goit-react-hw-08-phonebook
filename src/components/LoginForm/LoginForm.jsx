@@ -25,8 +25,6 @@ const LoginForm = () => {
         const password = form.elements.password.value;
 
         login({ email, password });
-
-        form.reset();
     };
 
     return (
