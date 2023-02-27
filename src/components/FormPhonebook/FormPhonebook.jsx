@@ -50,7 +50,6 @@ const FormPhonebook = () => {
             .typeError('That does not look like a phone number')
             .positive("A phone number can't start with a minus")
             .integer("A phone number can't include a decimal point")
-            .min(10)
             .required('A phone number is required'),
     });
 
@@ -88,9 +87,7 @@ const FormPhonebook = () => {
                             className={css.input}
                             type="tel"
                             name="phone"
-                            pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
-                            title="Phone number must be in the format 123-456-7890"
-                            placeholder="123 456 7890"
+                            placeholder="phone"
                         />
                         <ErrorMessage
                             className={css.error}
