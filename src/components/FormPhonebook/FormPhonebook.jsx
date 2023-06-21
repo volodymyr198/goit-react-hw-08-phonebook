@@ -10,7 +10,11 @@ import {
 } from 'redux/contactsSlice';
 import { useEffect } from 'react';
 
-import { notifyAddContact, serverError } from 'utils/notification';
+import {
+    notifyAddContact,
+    serverError,
+    addContactNameError,
+} from 'utils/notification';
 import css from './FormPhonebook.module.css';
 
 const FormPhonebook = () => {
@@ -36,7 +40,7 @@ const FormPhonebook = () => {
         contacts.find(
             contact => contact.name.toLowerCase() === values.name.toLowerCase()
         )
-            ? alert(`${values.name} is already in contacts!`)
+            ? addContactNameError(values.name)
             : addContact({ name, number }) && resetForm();
     };
 
@@ -87,7 +91,7 @@ const FormPhonebook = () => {
                             className={css.input}
                             type="tel"
                             name="phone"
-                            placeholder="phone"
+                            placeholder="phone 066 111 11 11"
                         />
                         <ErrorMessage
                             className={css.error}

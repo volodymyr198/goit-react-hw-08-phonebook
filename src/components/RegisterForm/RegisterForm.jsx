@@ -33,7 +33,7 @@ const RegisterForm = () => {
 
     return (
         <>
-            <ToastContainer autoClose={1500} position="top-center" />
+            <ToastContainer autoClose={2000} position="top-center" />
             <form
                 className={css.form}
                 onSubmit={handleSubmit}
@@ -44,6 +44,7 @@ const RegisterForm = () => {
                     <input
                         className={css.input}
                         type="text"
+                        autoComplete="off"
                         name="name"
                         placeholder="Username"
                         required
@@ -54,8 +55,9 @@ const RegisterForm = () => {
                     <input
                         className={css.input}
                         type="email"
+                        autoComplete="off"
                         name="email"
-                        placeholder="Email"
+                        placeholder="Email - example@mail.com"
                         required
                     />
                 </label>
@@ -64,8 +66,9 @@ const RegisterForm = () => {
                     <input
                         className={css.input}
                         type="password"
+                        autoComplete="off"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Password - minimum 7 characters"
                         required
                     />
                 </label>
